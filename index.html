@@ -1,10 +1,132 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Mon site</title>
+    <title>Accueil – MediaMiam</title>
 </head>
 <body>
-    <h1>Hello World</h1>
+
+    <!-- ===================== -->
+    <!--   BARRE DE NAVIGATION -->
+    <!-- ===================== -->
+
+    <header>
+        <h1>MediaMiam</h1>
+
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="profil.html">Mon profil</a></li>
+                <li><a href="login.html">Se connecter</a></li>
+                <li><a href="logout.html">Se déconnecter</a></li>
+                <li><a href="inscription.html">S'inscrire</a></li>
+            </ul>
+        </nav>
+
+        <form action="#" method="get">
+            <label for="search">Recherche :</label>
+            <input type="text" id="search" name="q" placeholder="Rechercher un contenu...">
+            <button type="submit">Rechercher</button>
+        </form>
+    </header>
+
+
+
+    <!-- ===================== -->
+    <!--     CONTENU PRINCIPAL -->
+    <!-- ===================== -->
+
+    <main>
+
+        <!-- Message d’accueil -->
+
+        <section>
+            <h2>Parce qu'on va dévorer du contenu</h2>
+            <p>
+                Accédez légalement à vos films, séries, musiques et podcasts préférés.
+                Découvrez nos recommandations basées sur votre profil et vos recherches.
+            </p>
+        </section>
+
+        <!-- Filtres simples -->
+        <section>
+            <h3>Filtrer les contenus</h3>
+
+            <form action="#" method="get">
+                <label for="type-media">Type de média :</label>
+                <select id="type-media" name="type">
+                    <option value="tous">Tous</option>
+                    <option value="films">Films</option>
+                    <option value="series">Séries</option>
+                    <option value="musique">Musique</option>
+                    <option value="podcasts">Podcasts</option>
+                </select>
+
+                <label for="tri">Trier par :</label>
+                <select id="tri" name="tri">
+                    <option value="popularite">Popularité</option>
+                    <option value="recent">Récents</option>
+                    <option value="note">Meilleures notes</option>
+                </select>
+
+                <button type="submit">Appliquer</button>
+            </form>
+        </section>
+
+        <!-- Recommandations -->
+         
+        <section>
+            <h3>Recommandés pour vous</h3>
+
+            <article>
+                <h4>Média 1</h4>
+                <p>Description rapide du contenu.</p>
+                <a href="#">Voir la fiche</a>
+            </article>
+
+            <article>
+                <h4>Média 2</h4>
+                <p>Description rapide du contenu.</p>
+                <a href="#">Voir la fiche</a>
+            </article>
+
+            <article>
+                <h4>Média 3</h4>
+                <p>Description rapide du contenu.</p>
+                <a href="#">Voir la fiche</a>
+            </article>
+        </section>
+
+        <!-- Catégories -->
+        <section>
+            <h3>Catégories</h3>
+
+            <ul>
+                <li><a href="#">Populaire</a></li> 
+                <li><a href="#">Nouveautés</a></li>
+                <li><a href="#">Vos favoris</a></li>
+            </ul>
+        </section>
+
+    </main>
+
+
+
+    <!-- ===================== -->
+
+    <!--       PIED DE PAGE    -->
+    <!-- ===================== -->
+    <footer>
+        <p>&copy; 2025 MediaMiam</p>
+
+        <nav>
+            <ul>
+                <li><a href="#">CGU</a></li>
+                <li><a href="#">Politique de confidentialité</a></li>
+                <li><a href="#">Aide</a></li>
+            </ul>
+        </nav>
+    </footer>
+
 </body>
 </html>
