@@ -1,0 +1,279 @@
+
+:root {
+    /* Fonds (gris anthracite / noir doux) */
+    --bg-body: #121212;
+    --bg-surface: #1C1C1E;
+    --bg-card: #2A2A2C;
+
+    /* Couleurs d'accent (rouges du logo) */
+    --red-main: #E53935;      /* Rouge principal */
+    --red-dark: #B71C1C;      /* Rouge sombre */
+    --red-light: #EF5350;     /* Rouge clair/orangé du gradient */
+
+    /* Typographie */
+    --text-main: #F5F5F7;     /* Blanc cassé */
+    --text-muted: #C0C0C3;    /* Gris clair */
+
+    /* Styles divers */
+    --border-soft: #3A3A3C;
+    --radius-lg: 16px;
+    --radius-md: 10px;
+    --shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.7);
+} 
+
+/* =============================================
+   STYLE GLOBAL
+   ============================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    font-family: system-ui, sans-serif;
+}
+
+/* Conteneurs standard */
+header, main, footer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+
+/* =============================================
+   HEADER / NAVIGATION
+   ============================================= */
+
+header {
+    position: sticky;
+    top: 0;
+    background-color: #1C1C1E;
+    border-bottom: 1px solid #2A2A2C;
+    box-shadow: var(--shadow-soft);
+}
+
+/* LOGO */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 1rem;
+}
+
+.logo img {
+    height: 100px;   /* Taille image */
+}
+
+.logo span {
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--text-main);
+    text-transform: uppercase;
+}
+
+/* ---------------------------------------------
+   NAVIGATION
+   --------------------------------------------- */
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-main);
+    padding: 0.45rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--border-soft);
+    background-color: var(--bg-card);
+    font-size: 0.9rem;
+    transition: 0.2s;
+}
+
+/* Lien important (S'inscrire) */
+nav li:last-child a {
+    background: linear-gradient(135deg, var(--red-main), var(--red-dark));
+    border-color: transparent;
+    color: white;
+}
+
+/* Hover général */
+nav a:hover {
+    background-color: #3A3A3C;
+    border-color: var(--red-main);
+}
+
+/* ---------------------------------------------
+   FORMULAIRE DE RECHERCHE
+   --------------------------------------------- */
+
+header form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    background-color: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--border-soft);
+}
+
+header input[type="text"] {
+    flex: 1 1 230px;
+    padding: 0.6rem;
+    border-radius: 999px;
+    border: 1px solid var(--border-soft);
+    background-color: var(--bg-surface);
+    color: var(--text-main);
+}
+
+header button {
+    padding: 0.55rem 1.2rem;
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(135deg, var(--red-main), var(--red-dark));
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* =============================================
+   SECTIONS
+   ============================================= */
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+main > section {
+    background-color: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid var(--border-soft);
+}
+
+/* Titre principal */
+main > section:first-of-type h2 {
+    margin-top: 0;
+    font-size: 2rem;
+    color: white;
+}
+
+/* Texte de description */
+main > section:first-of-type p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    max-width: 42rem;
+}
+
+/* =============================================
+   SECTION FILTRES
+   ============================================= */
+
+main > section:nth-of-type(2) form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem 1rem;
+}
+
+main select {
+    padding: 0.4rem 0.7rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-soft);
+    background-color: var(--bg-surface);
+    color: var(--text-main);
+}
+
+main button {
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    background-color: var(--red-main);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* =============================================
+   SECTION RECOMMANDATIONS
+   ============================================= */
+
+section:nth-of-type(3) article {
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-soft);
+    margin-bottom: 1rem;
+}
+
+section:nth-of-type(3) article h4 {
+    margin: 0 0 0.4rem 0;
+}
+
+section:nth-of-type(3) article p {
+    margin: 0 0 0.6rem;
+    color: var(--text-muted);
+}
+
+section:nth-of-type(3) article a {
+    color: var(--red-main);
+    text-decoration: none;
+}
+
+/* =============================================
+   SECTION CATÉGORIES
+   ============================================= */
+
+section:nth-of-type(4) ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+}
+
+section:nth-of-type(4) li {
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-soft);
+}
+
+section:nth-of-type(4) a {
+    color: var(--text-main);
+    text-decoration: none;
+}
+
+/* =============================================
+   FOOTER
+   ============================================= */
+
+footer {
+    border-top: 1px solid var(--border-soft);
+    text-align: left;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+footer nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+}
+
+footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+}

@@ -3,15 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Accueil – MediaMiam</title>
+    <!-- Feuille de style principale -->
+    <link rel="stylesheet" href="styles/homepage.css">
+    <!-- Optionnel mais recommandé pour le responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
-    <!-- ===================== -->
     <!--   BARRE DE NAVIGATION -->
-    <!-- ===================== -->
 
     <header>
-        <h1>MediaMiam</h1>
+        <div class="logo">
+            <img src="media\pictures\logo.png" alt="Logo MediaMiam">
+            <span>MediaMiam</span>
+        </div>
+
+        <!-- MENU DE NAVIGATION -->
 
         <nav>
             <ul>
@@ -23,6 +30,8 @@
             </ul>
         </nav>
 
+        <!-- BARRE DE RECHERCHE -->
+
         <form action="#" method="get">
             <label for="search">Recherche :</label>
             <input type="text" id="search" name="q" placeholder="Rechercher un contenu...">
@@ -30,11 +39,7 @@
         </form>
     </header>
 
-
-
-    <!-- ===================== -->
     <!--     CONTENU PRINCIPAL -->
-    <!-- ===================== -->
 
     <main>
 
@@ -49,6 +54,7 @@
         </section>
 
         <!-- Filtres simples -->
+
         <section>
             <h3>Filtrer les contenus</h3>
 
@@ -74,7 +80,7 @@
         </section>
 
         <!-- Recommandations -->
-         
+
         <section>
             <h3>Recommandés pour vous</h3>
 
@@ -98,6 +104,7 @@
         </section>
 
         <!-- Catégories -->
+
         <section>
             <h3>Catégories</h3>
 
@@ -110,12 +117,8 @@
 
     </main>
 
-
-
-    <!-- ===================== -->
-
     <!--       PIED DE PAGE    -->
-    <!-- ===================== -->
+
     <footer>
         <p>&copy; 2025 MediaMiam</p>
 
