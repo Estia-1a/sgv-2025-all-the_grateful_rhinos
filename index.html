@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <title>Accueil – MediaMiam</title>
@@ -8,6 +9,7 @@
     <!-- Optionnel mais recommandé pour le responsive -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
 
     <!--   BARRE DE NAVIGATION -->
@@ -35,18 +37,22 @@
         <form action="#" method="get">
             <label for="search">Recherche :</label>
             <input type="text" id="search" name="q" placeholder="Rechercher un contenu...">
+
+            <!-- suggestions affichées en JS -->
+
+            <ul id="suggestions"></ul>
             <button type="submit">Rechercher</button>
         </form>
     </header>
 
     <!--     CONTENU PRINCIPAL -->
 
-    <main>
+    <main class="homepage-content">
 
         <!-- Message d’accueil -->
 
         <section>
-            <h2>Parce qu'on va dévorer du contenu</h2>
+            <h2>Bienvenue sur MediaMiam le paradis du divertissement</h2>
             <p>
                 Accédez légalement à vos films, séries, musiques et podcasts préférés.
                 Découvrez nos recommandations basées sur votre profil et vos recherches.
@@ -81,26 +87,16 @@
 
         <!-- Recommandations -->
 
-        <section>
+        <section id="reco">
             <h3>Recommandés pour vous</h3>
 
-            <article>
-                <h4>Média 1</h4>
-                <p>Description rapide du contenu.</p>
-                <a href="#">Voir la fiche</a>
-            </article>
+            <!-- Carrousel   -->
 
-            <article>
-                <h4>Média 2</h4>
-                <p>Description rapide du contenu.</p>
-                <a href="#">Voir la fiche</a>
-            </article>
-
-            <article>
-                <h4>Média 3</h4>
-                <p>Description rapide du contenu.</p>
-                <a href="#">Voir la fiche</a>
-            </article>
+            <div class="carousel-container">
+                <button class="carousel-btn left">❮</button>
+                <div class="carousel-track"></div>
+                <button class="carousel-btn right">❯</button>
+            </div>
         </section>
 
         <!-- Catégories -->
@@ -130,6 +126,8 @@
             </ul>
         </nav>
     </footer>
+    <!-- Script JavaScript principal -->
+    <script src="script/homepage.js"></script>
 
 </body>
 </html>
