@@ -27,9 +27,9 @@
     --shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.7);
 } 
 
-/* =============================================
+/* =====================
    STYLE GLOBAL
-   ============================================= */
+   ===================== */
 
 * {
     box-sizing: border-box;
@@ -79,6 +79,8 @@ header {
     background-color: #1C1C1E;
     border-bottom: 1px solid #2A2A2C;
     box-shadow: var(--shadow-soft);
+    border-radius: 0 0 24px 24px;  
+    overflow: hidden;
 }
 
 /* LOGO */
@@ -101,6 +103,24 @@ header {
     text-transform: uppercase;
 }
 
+header.shrink {
+    padding-block: 0.6rem;
+    background-color: rgba(0,0,0,0.85);
+    backdrop-filter: blur(6px);
+    transition: 0.3s ease;
+}
+
+.fade-slide {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease-out;
+}
+
+.fade-slide.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 /* ---------------------------------------------
    NAVIGATION
    --------------------------------------------- */
@@ -112,9 +132,12 @@ nav ul {
     display: flex;
     flex-wrap: wrap;
     gap: 0.7rem;
+    align-items: center;
 }
 
 nav a {
+    display: inline-flex;           
+    align-items: center;            
     text-decoration: none;
     color: var(--text-main);
     padding: 0.45rem 1rem;
@@ -130,6 +153,7 @@ nav li:last-child a {
     background: linear-gradient(135deg, var(--red-main), var(--red-dark));
     border-color: transparent;
     color: white;
+    padding: 0.45rem 1rem;
 }
 
 /* Hover général */
@@ -255,7 +279,61 @@ section:nth-of-type(3) article a {
     color: var(--red-main);
     text-decoration: none;
 }
+/* =============================================
+    SECTION CARROUSEL ET SUGGESTIONS
+   ============================================= */
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    margin-top: 1rem;
+}
 
+.carousel-track {
+    display: flex;
+    gap: 1rem;
+    transition: transform 0.5s ease;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(20,20,20,0.7);
+    border: none;
+    color: white;
+    font-size: 2rem;
+    padding: 0.3rem 0.8rem;
+    cursor: pointer;
+    z-index: 5;
+    border-radius: 8px;
+}
+
+#suggestions {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: #2A2A2C;
+    border: 1px solid #3A3A3C;
+    border-radius: 8px;
+    margin-top: 0.5rem;
+    display: none;
+    position: absolute;
+    width: calc(100% - 40px);
+    z-index: 10;
+}
+
+#suggestions li {
+    padding: 0.6rem;
+    cursor: pointer;
+}
+
+#suggestions li:hover {
+    background: #3A3A3C;
+}
+
+
+.carousel-btn.left { left: 0; }
+.carousel-btn.right { right: 0; }
 /* =============================================
    SECTION CATÉGORIES
    ============================================= */
@@ -303,3 +381,4 @@ footer a {
     color: var(--text-muted);
     text-decoration: none;
 }
+
