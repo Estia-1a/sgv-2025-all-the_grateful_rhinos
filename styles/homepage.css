@@ -1,3 +1,9 @@
+/* =====================================================
+   La feuille de style suivant a été développée spécifiquement
+   pour la page d'accueil du site web. Merci de ne rien modifier.
+   -----------------------------------------------------
+    Crée par Creste Sanson - ESTIA - Novembre 2025
+   ===================================================== */
 
 :root {
     /* Fonds (gris anthracite / noir doux) */
@@ -29,26 +35,46 @@
     box-sizing: border-box;
 }
 
+/* Background image homepage */
+
 body {
-    margin: 0;
-    background-color: var(--bg-body);
+    
+    background-image: url("../media/pictures/bg.png"); /* chemin à adapter si besoin */
+    background-size: cover;         /* l’image prend tout l’écran */
+    background-position: center;    /* centrée */
+    background-repeat: no-repeat;   /* pas de répétition */
+    background-attachment: fixed;   /* effet paralaxe discret */
     color: var(--text-main);
-    font-family: system-ui, sans-serif;
 }
 
+/* Overlay sombre pour lisibilité */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);  /* opacité du voile noir */
+    pointer-events: none;            /* ne bloque pas les clics */
+    z-index: -1;                     /* derrière tout */
+}    
+
 /* Conteneurs standard */
+
 header, main, footer {
     max-width: 1200px;
     margin: 0 auto;
     padding: 1.5rem;
+    position: relative;
+    z-index: 1;
 }
+
 
 /* =============================================
    HEADER / NAVIGATION
    ============================================= */
 
 header {
-    position: sticky;
+    position: static;
     top: 0;
     background-color: #1C1C1E;
     border-bottom: 1px solid #2A2A2C;
