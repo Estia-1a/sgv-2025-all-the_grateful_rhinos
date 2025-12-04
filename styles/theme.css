@@ -60,12 +60,14 @@ html {
 
 body {
     margin: 0;
-    background-color: var(--bg-body);
     color: var(--text-main);
     /* Police générale : stack moderne pour faire pro */
     font-family: system-ui, -apple-system, BlinkMacSystemFont,
                  "Segoe UI", Roboto, sans-serif;
     line-height: 1.5;
+    background-image:url("../media/pictures/bg.png") ;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 /* Conteneur standard pour centrer les contenus à utiliser sur toutes les pages si besoin : <div class="container"> */
@@ -245,6 +247,50 @@ header button {
     cursor: pointer;
 }
 
+.navbar {
+    position: fixed;        /* reste en haut même au scroll */
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 2rem;
+    background-color: #333;
+    color: white;
+    z-index: 1000;          /* pour être au-dessus du contenu */
+}
+
+/* Logo */
+.navbar .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Liens */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+    color: #ff9800;
+}
+
+/* Contenu sous la navbar */
+.content {
+    padding-top: 70px; /* espace pour que le contenu ne soit pas caché par la navbar */
+}
+
 /* ==========================
    6. LAYOUT PRINCIPAL
    ========================== */
@@ -262,6 +308,19 @@ main {
     box-shadow: var(--shadow-soft);
     border: 1px solid var(--border-soft);
     margin-bottom: 1.8rem;
+    margin: 0 auto;
+    max-width: 600px;
+    margin-right: 150px;
+    margin-bottom: 50px;
+ 
+
+}
+
+.image {      
+    width: 0px;
+    height: 0px;
+    margin-top: 125px;
+    margin-left: 150px;
 }
 
 /* Pour une “carte” dans une section : <article class="card"> */
@@ -280,13 +339,16 @@ main {
 /* Bouton principal (rouge) : class="btn btn-primary" */
 .btn {
     display: inline-block;
-    padding: 0.55rem 1.2rem;
+    padding: 0.5rem 1rem;
     border-radius: var(--radius-pill);
-    border: 1px solid transparent;
+    border: 0.5px solid transparent;
     font-size: 0.95rem;
     cursor: pointer;
     text-decoration: none;
     text-align: center;
+    margin-left: 1200px;
+
+
 }
 
 .btn-primary {
@@ -305,6 +367,8 @@ main {
 .btn-ghost:hover {
     opacity: 0.92;
 }
+
+
 
 /* ==========================
    8. FORMULAIRES
