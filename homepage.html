@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Accueil – MediaMiam</title>
+    <link rel="stylesheet" href="styles/homepage.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+    <!-- Header -->
+
+    <header>
+        <div class="header-inner">
+            <div class="logo">
+                <img src="media/pictures/logo.png" alt="Logo MediaMiam">
+                <span>MediaMiam</span>
+            </div>
+
+            <nav>
+                <ul>
+
+                    <!-- Ces liens seront masqués/affichés par le JS -->
+
+                    <li><a href="profil.html" data-role="profile-link">Mon profil</a></li>
+                    <li><a href="panier.html" data-role="cart-link">Panier</a></li>
+                    <li><a href="login.html" data-role="login-link">Se connecter</a></li>
+                    <li><a href="inscription.html" data-role="signup-link">S'inscrire</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Barre de recherche sous la barre de nav -->
+
+        <form action="#" method="get">
+            <label for="search">Recherche :</label>
+            <input type="text" id="search" name="q" placeholder="Rechercher un contenu...">
+        </form>
+    </header>
+
+
+    <!-- Contenu -->
+
+    <main class="homepage-content">
+
+        <section>
+            <h2>Bienvenue sur MediaMiam, le paradis du divertissement</h2>
+            <p>
+                Accédez légalement à vos films, séries, musiques et podcasts préférés.
+                Découvrez nos recommandations basées sur vos goûts.
+            </p>
+        </section>
+
+        <section>
+            <h3>Filtrer les contenus</h3>
+
+            <form action="#" method="get">
+                <label for="type-media">Type de média :</label>
+                <select id="type-media" name="type">
+                    <option value="tous">Tous</option>
+                    <option value="films">Films</option>
+                    <option value="series">Séries</option>
+                    <option value="musique">Musique</option>
+                    <option value="podcasts">Podcasts</option>
+                </select>
+
+                <label for="tri">Trier par :</label>
+                <select id="tri" name="tri">
+                    <option value="popularite">Popularité</option>
+                    <option value="recent">Récents</option>
+                    <option value="note">Meilleures notes</option>
+                </select>
+                
+            </form>
+        </section>
+
+        <!-- Section recommandations -->
+
+       <section id="reco">
+            <h3>Recommandés pour vous</h3>
+
+            <div class="media-grid">
+
+                <div class="media-card film"
+                    data-title="Coup de Foudre à Bollywood"
+                    data-type="films"
+                    data-year="2004"
+                    data-popularity="95"
+                    data-note="8.2"
+                    data-price="payant"
+                    data-href="films/bollywood.html">
+
+                    <img src="media/pictures/Film1.png" alt="Coup de Foudre à Bollywood">
+                    <div class="overlay">
+                        <h4>Coup de Foudre à Bollywood</h4>
+                        <p>Comédie romantique colorée entre Londres et l’Inde.</p>
+                        <p>Année : 2004 • Note : 8.2 • Payant</p>
+                    </div>
+                </div>
+
+                <div class="media-card film"
+                    data-title="Cyrano de Bergerac"
+                    data-type="films"
+                    data-year="1990"
+                    data-popularity="90"
+                    data-note="9.0"
+                    data-price="gratuit"
+                    data-href="films/cyrano.html">
+
+                    <img src="media/pictures/Film2.png" alt="Cyrano de Bergerac">
+                    <div class="overlay">
+                        <h4>Cyrano de Bergerac</h4>
+                        <p>Classique romantique français porté par Depardieu.</p>
+                        <p>Année : 1990 • Note : 9.0 • Gratuit</p>
+                    </div>
+                </div>
+
+                <div class="media-card film"
+                    data-title="Les Aventures de Rabbi Jacob"
+                    data-type="films"
+                    data-year="1973"
+                    data-popularity="98"
+                    data-note="8.7"
+                    data-price="payant"
+                    data-href="films/rabbijacob.html">
+
+                    <img src="media/pictures/Film3.jpg" alt="Les Aventures de Rabbi Jacob">
+                    <div class="overlay">
+                        <h4>Les Aventures de Rabbi Jacob</h4>
+                        <p>Comédie culte portée par Louis de Funès.</p>
+                        <p>Année : 1973 • Note : 8.7 • Payant</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+
+    <!-- Footer -->
+
+    <footer>
+        <p>&copy; 2025 MediaMiam</p>
+
+        <nav>
+            <ul>
+                <li><a href="#">CGU</a></li>
+                <li><a href="#">Politique de confidentialité</a></li>
+                <li><a href="#">Aide</a></li>
+            </ul>
+        </nav>
+    </footer>
+
+    <script src="script/homepage.js"></script>
+
+</body>
+</html>

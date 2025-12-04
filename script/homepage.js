@@ -1,171 +1,206 @@
 /* ==============================================================
-   HOMEPAGE JS – MEDIAMIAM (FULL VERSION)
-  Pour l'instant on le conserve mais voir pour le supprimer plus tard en fonction des consignes
+   HOMEPAGE JS – MEDIAMIAM
    ============================================================== */
 
 /* ==============================================================
-   1. VARIABLES DE BASE
+    GESTION ÉTAT CONNECTÉ / DÉCONNECTÉ
    ============================================================== */
 
-const loginBtn = document.querySelector('a[href="login.html"]');
-const logoutBtn = document.querySelector('a[href="logout.html"]');
-const profileBtn = document.querySelector('a[href="profil.html"]');
+const loginLink   = document.querySelector('[data-role="login-link"]');
+const logoutLink  = null; // ajouter un lien logout plus tard 
+const signupLink  = document.querySelector('[data-role="signup-link"]');
+const profileLink = document.querySelector('[data-role="profile-link"]');
+const cartLink    = document.querySelector('[data-role="cart-link"]');
 
-let isLoggedIn = false;
-
-const searchInput = document.querySelector("#search");
-const suggestionsBox = document.querySelector("#suggestions");
-
-const carouselTrack = document.querySelector(".carousel-track");
-const carouselLeft = document.querySelector(".carousel-btn.left");
-const carouselRight = document.querySelector(".carousel-btn.right");
-
-let carouselIndex = 0;
-let carouselItemWidth = 220; // largeur estimée d'une carte
-
-/* ============================================================== 
-   2. NAVBAR – LOGIN/LOGOUT
-   ============================================================== */
+// on lit l'état dans le localStorage pour "simuler" une vraie session
+let isLoggedIn = localStorage.getItem("mm_isLoggedIn") === "true";
 
 function updateNavbar() {
+    if (!loginLink || !signupLink || !profileLink || !cartLink) return;
+
     if (isLoggedIn) {
-        loginBtn.style.display = "none";
-        logoutBtn.style.display = "inline-block";
-        profileBtn.style.display = "inline-block";
+        // connecté : on affiche profil + panier
+        profileLink.style.display = "inline-block";
+        cartLink.style.display    = "inline-block";
+
+        // on masque se connecter / s'inscrire
+        loginLink.style.display   = "none";
+        signupLink.style.display  = "none";
     } else {
-        loginBtn.style.display = "inline-block";
-        logoutBtn.style.display = "none";
-        profileBtn.style.display = "none";
+        // pas connecté : on affiche se connecter / s'inscrire
+        loginLink.style.display   = "inline-block";
+        signupLink.style.display  = "inline-block";
+
+        // on masque profil + panier
+        profileLink.style.display = "none";
+        cartLink.style.display    = "none";
     }
 }
 
 updateNavbar();
 
-loginBtn?.addEventListener("click", () => {
-    isLoggedIn = true;
-    updateNavbar();
+/*
+   Pour l'instant, on simule la connexion : si tu veux tester
+   sans coder toute la page de login, tu peux intercepter le clic ici.
+
+   Si tu préfères que "Se connecter" aille directement sur login.html
+   sans simulation, tu laisses tel quel (pas de e.preventDefault()).
+*/
+
+loginLink?.addEventListener("click", () => { //Ajouter login link ici
 });
 
-logoutBtn?.addEventListener("click", () => {
-    isLoggedIn = false;
-    updateNavbar();
-});
-
-/* ============================================================== 
-   3. HEADER SHRINK (style Netflix)
-   ============================================================== */
+/* ==============================================================
+   2. HEADER SHRINK + ANIMATIONS D’APPARITION
+   ============================================================== 
 
 const header = document.querySelector("header");
 
-window.addEventListener("scroll", () => {
-    if (window.scrollY > 50) {
-        header.classList.add("shrink");
-    } else {
-        header.classList.remove("shrink");
-    }
+if (header) {
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+            header.classList.add("shrink");
+        } else {
+            header.classList.remove("shrink");
+        }
+    });
+}
+
+const fadeSections = document.querySelectorAll(".homepage-content section");
+
+fadeSections.forEach((section) => {
+    section.classList.add("fade-slide");
 });
 
-/* ============================================================== 
-   4. ANIMATIONS D’APPARITION
-   ============================================================== */
-
-const fadeElements = document.querySelectorAll(".homepage-content section");
-
-fadeElements.forEach(el => el.classList.add("fade-slide"));
-
 function revealOnScroll() {
-    fadeElements.forEach(el => {
-        const rect = el.getBoundingClientRect();
+    fadeSections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
         if (rect.top < window.innerHeight - 80) {
-            el.classList.add("visible");
+            section.classList.add("visible");
         }
     });
 }
 
 window.addEventListener("scroll", revealOnScroll);
-revealOnScroll();
+revealOnScroll(); */ // A voir si j'ai le temps ppour le mettre en place
 
-/* ============================================================== 
-   5. CARROUSEL
+/* ==============================================================
+   3. FILTRAGE & TRI DES MÉDIAS
    ============================================================== */
 
-const sampleMedia = [
-    { title: "Film Rouge", img: "https://via.placeholder.com/220x330/E53935/FFFFFF?text=Rouge" },
-    { title: "Série", img: "https://via.placeholder.com/220x330/2A2A2C/FFFFFF?text=Serie" },
-    { title: "Documentaire", img: "https://via.placeholder.com/220x330/B71C1C/FFFFFF?text=Docu" },
-    { title: "Film Action", img: "https://via.placeholder.com/220x330/3A3A3C/FFFFFF?text=Action" },
-    { title: "Musique", img: "https://via.placeholder.com/220x330/121212/FFFFFF?text=Musique" },
-    { title: "Podcast", img: "https://via.placeholder.com/220x330/EF5350/FFFFFF?text=Podcast" }
-];
+const searchInput = document.querySelector("#search");
+const typeSelect  = document.querySelector("#type-media");
+const sortSelect  = document.querySelector("#tri");
+const mediaGrid   = document.querySelector(".media-grid");
+const mediaCards  = mediaGrid ? Array.from(mediaGrid.querySelectorAll(".media-card")) : [];
 
-/* Remplissage auto du carrousel */
+function normalize(str) {
+    return (str || "")
+        .toString()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase();
+}
 
-sampleMedia.forEach(item => {
-    const card = document.createElement("div");
-    card.style.minWidth = "220px";
-    card.style.height = "330px";
-    card.style.borderRadius = "12px";
-    card.style.backgroundImage = `url(${item.img})`;
-    card.style.backgroundSize = "cover";
-    card.style.backgroundPosition = "center";
+function applyFiltersAndSort() {
+    if (!mediaGrid || mediaCards.length === 0) return;
+
+    const text = normalize(searchInput?.value || "");
+    const type = typeSelect?.value || "tous";
+    const tri  = sortSelect?.value || "popularite";
+
+    // 1) filtrage
+    let filtered = mediaCards.filter((card) => {
+        const titleEl = card.querySelector("h4");
+        const title = normalize(titleEl ? titleEl.textContent : "");
+
+        let cardType = card.dataset.type || "tous";
+        if (cardType === "tous" || !card.dataset.type) {
+            if (card.classList.contains("film"))    cardType = "films";
+            if (card.classList.contains("serie"))   cardType = "series";
+            if (card.classList.contains("musique")) cardType = "musique";
+            if (card.classList.contains("podcast")) cardType = "podcasts";
+        }
+
+        const matchText = text === "" || title.includes(text);
+        const matchType = type === "tous" || cardType === type;
+
+        return matchText && matchType;
+    });
+
+    // 2) tri
+    filtered.sort((a, b) => {
+        const aPop  = parseFloat(a.dataset.popularity || "0");
+        const bPop  = parseFloat(b.dataset.popularity || "0");
+        const aYear = parseInt(a.dataset.year || "0", 10);
+        const bYear = parseInt(b.dataset.year || "0", 10);
+        const aNote = parseFloat(a.dataset.note || "0");
+        const bNote = parseFloat(b.dataset.note || "0");
+
+        switch (tri) {
+            case "popularite":
+                return bPop - aPop;      // plus populaire en premier
+            case "recent":
+                return bYear - aYear;    // plus récent en premier
+            case "note":
+                return bNote - aNote;    // meilleure note en premier
+            default:
+                return 0;
+        }
+    });
+
+    // 3) réinjection dans le DOM (ordre visuel)
+    mediaGrid.innerHTML = "";
+    filtered.forEach((card) => {
+        mediaGrid.appendChild(card);
+        card.style.display = "block";
+    });
+}
+
+// A voir pour ajoute un bouton appliquer la recherche plus tard, pour l'instant c'est en live
+
+searchInput?.addEventListener("input", applyFiltersAndSort);
+typeSelect?.addEventListener("change", applyFiltersAndSort);
+sortSelect?.addEventListener("change", applyFiltersAndSort);
+
+applyFiltersAndSort();
+
+/* ==============================================================
+   4. REDIRECTION VERS LES PAGES FILMS AVEC CONNECTION OBLIGATOIRE
+   ============================================================== */
+
+mediaCards.forEach((card) => {
     card.style.cursor = "pointer";
-    card.title = item.title;
 
-    carouselTrack.appendChild(card);
+    card.addEventListener("click", (e) => {
+        const targetUrl = card.dataset.href;
+
+        if (!targetUrl) return;
+
+        // si pas connecté -> on redirige vers la page de login
+        if (!isLoggedIn) {
+            e.preventDefault();
+            // plus tard tu pourras ajouter ?redirect=...
+            window.location.href = "login.html";
+        } else {
+            window.location.href = targetUrl;
+        }
+    });
 });
 
-/* Navigation du carrousel */
-carouselRight.addEventListener("click", () => {
-    carouselIndex++;
-    if (carouselIndex > sampleMedia.length - 4) {
-        carouselIndex = sampleMedia.length - 4;
-    }
-    carouselTrack.style.transform = `translateX(-${carouselIndex * carouselItemWidth}px)`;
-});
-
-carouselLeft.addEventListener("click", () => {
-    carouselIndex--;
-    if (carouselIndex < 0) carouselIndex = 0;
-    carouselTrack.style.transform = `translateX(-${carouselIndex * carouselItemWidth}px)`;
-});
-
-/* ============================================================== 
-   6. RECHERCHE INSTANTANÉE (suggestions dynamiques)
+/* ==============================================================
+   5. REDIRECTION VERS PANIER (SEULEMENT SI CONNECTÉ)
    ============================================================== */
 
-searchInput.addEventListener("input", () => {
-    const query = searchInput.value.trim().toLowerCase();
-
-    if (query.length < 1) {
-        suggestionsBox.style.display = "none";
-        return;
-    }
-
-    const results = sampleMedia
-        .filter(item => item.title.toLowerCase().includes(query))
-        .slice(0, 5);
-
-    if (results.length === 0) {
-        suggestionsBox.style.display = "none";
-        return;
-    }
-
-    suggestionsBox.innerHTML = results
-        .map(item => `<li>${item.title}</li>`)
-        .join("");
-
-    suggestionsBox.style.display = "block";
-});
-
-/* Choix d'une suggestion */
-suggestionsBox.addEventListener("click", (e) => {
-    if (e.target.tagName === "LI") {
-        searchInput.value = e.target.textContent;
-        suggestionsBox.style.display = "none";
+cartLink?.addEventListener("click", (e) => {
+    if (!isLoggedIn) {
+        e.preventDefault();
+        window.location.href = "login.html";
     }
 });
 
-/* ============================================================== 
-   7. DEBUG
+/* ==============================================================
+   DEBUG
    ============================================================== */
-console.log("Homepage JS complet chargé !");
+
+console.log("Homepage JS MediaMiam chargé (navigation + filtres + tri + protections).");

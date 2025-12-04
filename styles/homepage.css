@@ -38,7 +38,7 @@
 /* Background image homepage */
 
 body {
-    
+    margin: 0;
     background-image: url("../media/pictures/bg.png"); /* chemin à adapter si besoin */
     background-size: cover;         /* l’image prend tout l’écran */
     background-position: center;    /* centrée */
@@ -68,7 +68,9 @@ header, main, footer {
     z-index: 1;
 }
 
-
+button {
+    font-family: inherit;
+}
 /* =============================================
    HEADER / NAVIGATION
    ============================================= */
@@ -79,17 +81,34 @@ header {
     background-color: #1C1C1E;
     border-bottom: 1px solid #2A2A2C;
     box-shadow: var(--shadow-soft);
-    border-radius: 0 0 24px 24px;  
+    border-radius: 0 0 24px 24px;
     overflow: hidden;
 }
 
-/* LOGO */
+/* Conteneur flex pour logo + nav */
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+/* on peut enlever la margin-bottom de .logo si tu l'avais */
 .logo {
     display: flex;
     align-items: center;
     gap: 0.7rem;
-    margin-bottom: 1rem;
 }
+
+/* nav déjà stylé, mais ça aide à le plaquer à droite */
+header nav ul {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    justify-content: flex-end;
+}
+
 
 .logo img {
     height: 100px;   /* Taille image */
@@ -103,27 +122,43 @@ header {
     text-transform: uppercase;
 }
 
-header.shrink {
-    padding-block: 0.6rem;
-    background-color: rgba(0,0,0,0.85);
-    backdrop-filter: blur(6px);
-    transition: 0.3s ease;
+/* =============================================
+   FORMULAIRE DE RECHERCHE
+   ============================================= */
+
+header form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    background-color: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--border-soft);
+    position:relative;
 }
 
-.fade-slide {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.6s ease-out;
+header input[type="text"] {
+    flex: 1 1 230px;
+    padding: 0.6rem;
+    border-radius: 999px;
+    border: 1px solid var(--border-soft);
+    background-color: var(--bg-surface);    
+    color: var(--text-main);
 }
 
-.fade-slide.visible {
-    opacity: 1;
-    transform: translateY(0);
+header button {
+    padding: 0.55rem 1.2rem;
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(135deg, var(--red-main), var(--red-dark));
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
 }
 
-/* ---------------------------------------------
+/* =============================================
    NAVIGATION
-   --------------------------------------------- */
+   ============================================ */
 
 nav ul {
     list-style: none;
@@ -160,39 +195,6 @@ nav li:last-child a {
 nav a:hover {
     background-color: #3A3A3C;
     border-color: var(--red-main);
-}
-
-/* ---------------------------------------------
-   FORMULAIRE DE RECHERCHE
-   --------------------------------------------- */
-
-header form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    background-color: var(--bg-card);
-    border-radius: var(--radius-lg);
-    padding: 0.7rem 1rem;
-    border: 1px solid var(--border-soft);
-}
-
-header input[type="text"] {
-    flex: 1 1 230px;
-    padding: 0.6rem;
-    border-radius: 999px;
-    border: 1px solid var(--border-soft);
-    background-color: var(--bg-surface);
-    color: var(--text-main);
-}
-
-header button {
-    padding: 0.55rem 1.2rem;
-    border-radius: 999px;
-    border: none;
-    background: linear-gradient(135deg, var(--red-main), var(--red-dark));
-    color: white;
-    font-weight: 600;
-    cursor: pointer;
 }
 
 /* =============================================
@@ -254,86 +256,122 @@ main button {
     cursor: pointer;
 }
 
-/* =============================================
-   SECTION RECOMMANDATIONS
-   ============================================= */
-
-section:nth-of-type(3) article {
-    padding: 1rem;
-    border-radius: var(--radius-md);
-    background-color: var(--bg-surface);
-    border: 1px solid var(--border-soft);
+#catalogue .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
     margin-bottom: 1rem;
 }
 
-section:nth-of-type(3) article h4 {
-    margin: 0 0 0.4rem 0;
+#catalogue .filters input[type="radio"] {
+    display: none;
 }
 
-section:nth-of-type(3) article p {
-    margin: 0 0 0.6rem;
+#catalogue .filters label {
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid var(--border-soft);
+    background-color: var(--bg-surface);
+    color: var(--text-main);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#filtre-tous:checked      + label,
+#filtre-films:checked     + label,
+#filtre-series:checked    + label,
+#filtre-musique:checked   + label,
+#filtre-podcasts:checked  + label {
+    background: linear-gradient(135deg, var(--red-main), var(--red-dark));
+    border-color: transparent;
+}
+
+/* =============================================
+    SECTION FILMS GRIS SUGGESTIONS
+   ============================================= */
+
+.media-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+}
+.media-card {
+    position: relative;
+    width: 160px;      /* taille du carré */
+    height: 160px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--border-soft);
+    background-color: var(--bg-surface);
+    box-shadow: var(--shadow-soft);
+    cursor: pointer;
+}
+
+.media-card .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    opacity: 0;
+    padding: 0.8rem;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    transition: opacity 0.3s ease;
+}
+
+.media-card .overlay h4 {
+    margin: 0 0 0.3rem 0;
+    font-size: 0.95rem;
+}
+
+.media-card .overlay p {
+    margin: 0;
+    font-size: 0.75rem;
     color: var(--text-muted);
 }
 
-section:nth-of-type(3) article a {
-    color: var(--red-main);
-    text-decoration: none;
-}
-/* =============================================
-    SECTION CARROUSEL ET SUGGESTIONS
-   ============================================= */
-.carousel-container {
-    position: relative;
-    overflow: hidden;
-    margin-top: 1rem;
+.media-card:hover .overlay {
+    opacity: 1;
 }
 
-.carousel-track {
-    display: flex;
-    gap: 1rem;
-    transition: transform 0.5s ease;
+.media-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;     /* recadrage propre */
+    display: block;
 }
 
-.carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(20,20,20,0.7);
-    border: none;
-    color: white;
-    font-size: 2rem;
-    padding: 0.3rem 0.8rem;
-    cursor: pointer;
-    z-index: 5;
-    border-radius: 8px;
-}
-
-#suggestions {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    background: #2A2A2C;
-    border: 1px solid #3A3A3C;
-    border-radius: 8px;
-    margin-top: 0.5rem;
+#catalogue .media-card {
     display: none;
-    position: absolute;
-    width: calc(100% - 40px);
-    z-index: 10;
 }
 
-#suggestions li {
-    padding: 0.6rem;
-    cursor: pointer;
+/* TOUS */
+#filtre-tous:checked ~ .media-grid .media-card {
+    display: block;
 }
 
-#suggestions li:hover {
-    background: #3A3A3C;
+/* FILMS */
+#filtre-films:checked ~ .media-grid .media-card.film {
+    display: block;
 }
 
+/* SÉRIES */
+#filtre-series:checked ~ .media-grid .media-card.serie {
+    display: block;
+}
 
-.carousel-btn.left { left: 0; }
-.carousel-btn.right { right: 0; }
+/* MUSIQUE */
+#filtre-musique:checked ~ .media-grid .media-card.musique {
+    display: block;
+}
+
+/* PODCASTS */
+#filtre-podcasts:checked ~ .media-grid .media-card.podcast {
+    display: block;
+}
+
 /* =============================================
    SECTION CATÉGORIES
    ============================================= */
