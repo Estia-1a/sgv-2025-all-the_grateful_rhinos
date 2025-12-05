@@ -18,10 +18,14 @@ let isLoggedIn = localStorage.getItem("mm_isLoggedIn") === "true";
 function updateNavbar() {
     if (!loginLink || !signupLink || !profileLink || !cartLink) return;
 
+    const logoutLink = document.querySelector('[data-role="logout-link"]');
+
+
     if (isLoggedIn) {
         // connecté : on affiche profil + panier
         profileLink.style.display = "inline-block";
         cartLink.style.display    = "inline-block";
+        logoutLink.style.display  = "inline-block";
 
         // on masque se connecter / s'inscrire
         loginLink.style.display   = "none";
@@ -34,7 +38,23 @@ function updateNavbar() {
         // on masque profil + panier
         profileLink.style.display = "none";
         cartLink.style.display    = "none";
+        logoutLink.style.display  = "none";
     }
+
+    logoutLink?.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    // Efface la session
+    localStorage.removeItem("mm_isLoggedIn");
+
+    // Mets à jour l'état
+    isLoggedIn = false;
+    updateNavbar();
+
+    // Redirige vers la page d’accueil
+    window.location.href = "index.html";
+});
+
 }
 
 updateNavbar();
