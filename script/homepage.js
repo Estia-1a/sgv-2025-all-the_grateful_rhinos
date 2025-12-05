@@ -200,6 +200,56 @@ cartLink?.addEventListener("click", (e) => {
 });
 
 /* ==============================================================
+   6. FORMULAIRE DE SUPPORT – OUVERTURE OUTLOOK (MAILTO)
+   ============================================================== */
+
+const supportForm = document.querySelector(".support-form");
+
+if (supportForm) {
+    supportForm.addEventListener("submit", function (e) {
+        e.preventDefault(); // empêche l'envoi classique du formulaire
+
+        // Récupération des champs
+        const type       = document.querySelector("#support-type")?.value || "";
+        const media      = document.querySelector("#media-ref")?.value || "";
+        const subject    = document.querySelector("#support-subject")?.value || "";
+        const message    = document.querySelector("#support-message")?.value || "";
+        const email      = document.querySelector("#support-email")?.value || "";
+        const priorityEl = document.querySelector('input[name="support-priority"]:checked');
+        const priority   = priorityEl ? priorityEl.value : "normale";
+
+        // Adresse à laquelle tu veux recevoir les demandes
+        const to = "baptiste.aminot@etu.estia.fr"; 
+
+        // Sujet du mail
+        const mailSubject = `[MediaMiam] Demande de support - ${subject}`;
+
+        // Corps du mail
+        const mailBody = 
+`Type de demande : ${type}
+Priorité : ${priority}
+Média concerné : ${media || "Non précisé"}
+
+Message :
+${message}
+
+E-mail de contact : ${email}`;
+
+        // Construction du lien mailto avec encodage
+        const mailtoLink = `mailto:${encodeURIComponent(to)}`
+            + `?subject=${encodeURIComponent(mailSubject)}`
+            + `&body=${encodeURIComponent(mailBody)}`;
+
+        // Ouverture de la fenêtre de mail (Outlook / client par défaut)
+        window.location.href = mailtoLink;
+
+        // Optionnel : reset du formulaire après ouverture
+        // supportForm.reset();
+    });
+}
+
+
+/* ==============================================================
    DEBUG
    ============================================================== */
 
