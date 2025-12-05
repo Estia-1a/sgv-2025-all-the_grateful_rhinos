@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Aide & Support – MediaMiam</title>
+    <link rel="stylesheet" href="styles/homepage.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+        <div class="header-inner">
+            <div class="logo">
+                <img src="media/pictures/logo.png" alt="Logo MediaMiam">
+                <span>MediaMiam</span>
+            </div>
+
+            <nav>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="profil.html" data-role="profile-link">Mon profil</a></li>
+                    <li><a href="panier.html" data-role="cart-link">Panier</a></li>
+                    <li><a href="login.html" data-role="login-link">Se connecter</a></li>
+                    <li><a href="inscription.html" data-role="signup-link">S'inscrire</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <!-- CONTENU PRINCIPAL -->
+
+    <main class="homepage-content">
+
+        <!-- Introduction -->
+
+        <section>
+            <h2>Aide & Support MediaMiam</h2>
+            <p>
+                Besoin d’un coup de main pour utiliser MediaMiam, accéder à vos médias ou comprendre le fonctionnement
+                du panier&nbsp;? Cette page est là pour vous guider.
+            </p>
+            <p>
+                Consultez d’abord les questions fréquentes ci-dessous. Si vous ne trouvez pas votre réponse, utilisez
+                le formulaire de support pour nous envoyer une demande.
+            </p>
+        </section>
+
+        <!-- Questions fréquentes (mini FAQ) -->
+
+        <section>
+            <h3>Questions fréquentes</h3>
+            <ul>
+                <li><strong>Je n’arrive pas à me connecter.</strong><br>
+                    Vérifiez votre e-mail et votre mot de passe. Si le problème persiste, décrivez-le dans le formulaire
+                    ci-dessous en précisant le message d’erreur affiché.
+                </li>
+                <li><strong>Je ne peux pas accéder à la fiche d’un film.</strong><br>
+                    L’accès aux pages détaillées des films peut être réservé aux utilisateurs connectés. Assurez-vous
+                    d’être connecté avec votre Compte MediaMiam.
+                </li>
+                <li><strong>Un film est indiqué comme payant, comment l’acquérir&nbsp;?</strong><br>
+                    Sur la fiche du film, un bouton «&nbsp;Acquérir&nbsp;» vous redirigera vers votre panier ou un
+                    service partenaire (fonctionnalité en cours de développement dans ce projet).
+                </li>
+                <li><strong>Je souhaite supprimer mon compte.</strong><br>
+                    Indiquez-le via le formulaire de support en utilisant le type de demande «&nbsp;Compte &amp; confidentialité&nbsp;».
+                </li>
+            </ul>
+        </section>
+
+        <!-- Formulaire de support -->
+
+       <section>
+            <h3>Formulaire de support</h3>
+            <p>
+                Remplissez ce formulaire pour contacter le support MediaMiam. Les champs marqués d’un astérisque
+                (<span style="color:#EF5350;">*</span>) sont obligatoires.
+            </p>
+
+            <form action="#" method="post" class="support-form">
+
+                <div class="form-group">
+                    <label for="support-type">Type de demande <span style="color:#EF5350;">*</span></label>
+                    <select id="support-type" name="support-type" required>
+                        <option value="">-- Sélectionnez un type --</option>
+                        <option value="connexion">Connexion / Mot de passe</option>
+                        <option value="compte">Compte &amp; confidentialité</option>
+                        <option value="media">Problème avec un film / série / média</option>
+                        <option value="paiement">Paiement / panier</option>
+                        <option value="bug">Bug technique / affichage</option>
+                        <option value="autre">Autre demande</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="media-ref">Média concerné (titre du film, série, etc.)</label>
+                    <input type="text" id="media-ref" name="media-ref" placeholder="Ex : Coup de Foudre à Bollywood">
+                </div>
+
+                <div class="form-group">
+                    <label for="support-subject">Sujet de la demande <span style="color:#EF5350;">*</span></label>
+                    <input type="text" id="support-subject" name="support-subject" required
+                        placeholder="Ex : Impossible d’accéder à mon panier">
+                </div>
+
+                <div class="form-group">
+                    <label for="support-message">Description détaillée <span style="color:#EF5350;">*</span></label>
+                    <textarea id="support-message" name="support-message" rows="5" required
+                            placeholder="Expliquez votre problème : étapes pour le reproduire, message d’erreur, navigateur utilisé, etc."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="support-email">Votre e-mail de contact <span style="color:#EF5350;">*</span></label>
+                    <input type="email" id="support-email" name="support-email" required
+                        placeholder="exemple@domaine.com">
+                </div>
+
+                <div class="form-group">
+                    <label>Urgence de la demande</label>
+                    <div class="inline-options">
+                        <label>
+                            <input type="radio" name="support-priority" value="basse" checked>
+                            Basse
+                        </label>
+                        <label>
+                            <input type="radio" name="support-priority" value="normale">
+                            Normale
+                        </label>
+                        <label>
+                            <input type="radio" name="support-priority" value="haute">
+                            Haute
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="support-consent" required>
+                        J’accepte que les informations saisies soient utilisées pour le traitement de ma demande
+                        conformément à la <a href="confidentialite.html">Politique de confidentialité</a>.
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit">Envoyer ma demande</button>
+                </div>
+
+            </form>
+        </section>
+
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+        <p>&copy; 2025 MediaMiam</p>
+
+        <nav>
+            <ul>
+                <li><a href="cgu.html">CGU</a></li>
+                <li><a href="confidentialite.html">Politique de confidentialité</a></li>
+                <li><a href="aide.html">Aide</a></li>
+            </ul>
+        </nav>
+    </footer>
+
+    <script src="script/homepage.js"></script>
+</body>
+</html>
