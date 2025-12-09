@@ -156,6 +156,7 @@ header button {
     cursor: pointer;
 }
 
+
 /* =============================================
    NAVIGATION
    ============================================ */
@@ -286,6 +287,8 @@ main button {
     background: linear-gradient(135deg, var(--red-main), var(--red-dark));
     border-color: transparent;
 }
+
+
 
 /* =============================================
     SECTION FILMS GRIS SUGGESTIONS
@@ -483,4 +486,22 @@ footer a {
     color: white;
     border: none;
     cursor: pointer;
+}
+
+/* =============================================
+   Login
+   ============================================= */
+
+.login-container{
+    text-align: center;
+}
+
+
+.login-container [type="submit"] {
+
+    margin-top: 15px;
+    color: white;
+    align-items: center;
+    padding: 10px;
+
 }
