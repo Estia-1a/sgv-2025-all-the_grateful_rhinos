@@ -492,16 +492,14 @@ footer a {
    Login
    ============================================= */
 
-.login-container{
-    text-align: center;
-}
-
-
-.login-container [type="submit"] {
+.login-container {
 
     margin-top: 15px;
     color: white;
     align-items: center;
-    padding: 10px;
+    text-align: center;
+}
 
+.login-container [type ="submit"]{
+    margin-top: 15px;
 }
