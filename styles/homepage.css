@@ -35,6 +35,18 @@
     box-sizing: border-box;
 }
 
+#welcome {
+  opacity: 0;
+  animation: fadeIn 1.1s ease forwards;
+}
+
+@keyframes fadeIn {
+  to {
+      opacity: 1;
+  }
+}
+
+
 /* Background image homepage */
 
 body {
@@ -488,9 +500,9 @@ footer a {
     cursor: pointer;
 }
 
-/* =============================================
-   Login
-   ============================================= */
+/* ===========================
+   Profil utilisateur
+   =========================== */
 
 .login-container {
 
@@ -503,3 +515,62 @@ footer a {
 .login-container [type ="submit"]{
     margin-top: 15px;
 }
+.profil-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+#profil-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--red-main);
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.profil-box form {
+    width: 100%;
+    max-width: 380px;
+}
+
+.profil-box form input[type="text"],
+.profil-box form input[type="password"] {
+    width: 100%;
+}
+
+.button {
+    display: inline-block;
+    background: var(--red-main);
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    cursor: pointer;
+}
+
+
+/* ===========================
+   Login
+   =========================== */
+
+.auth-section {
+    max-width: 420px;      /* largeur du bloc */
+    margin: 3rem auto;     /* centre horizontal + marge haut/bas */
+}
+
+.auth-section h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.auth-section form > div {
+    margin-bottom: 0.8rem;
+}
+
+.auth-section input[type="email"],
+.auth-section input[type="password"],
+.auth-section input[type="text"] {
+    width: 100%;
+}
+

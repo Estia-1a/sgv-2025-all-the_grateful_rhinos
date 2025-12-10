@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mon profil – MediaMiam</title>
+    <link rel="stylesheet" href="styles/homepage.css">
+</head>
+
+<body>
+
+<header>
+    <div class="header-inner">
+        <div class="logo">
+            <img src="media/pictures/logo.png" alt="Logo MediaMiam">
+            <span>MediaMiam</span>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="profil.html" data-role="profile-link">Mon profil</a></li>
+                <li><a href="panier.html" data-role="cart-link">Panier</a></li>
+                <li><a href="#" data-role="logout-link">Se déconnecter</a></li>
+
+                <li><a href="Login.html" data-role="login-link">Se connecter</a></li>
+                <li><a href="inscription.html" data-role="signup-link">S'inscrire</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main class="homepage-content">
+    <section>
+        <h2>Mon profil</h2>
+
+        <div id="profil-info" class="profil-box">
+            <img id="profil-avatar" src="media/pictures/user_default.png" alt="Avatar utilisateur">
+
+            <p id="profil-email"></p>
+            <p id="profil-pseudo"></p>
+            <p id="profil-birthdate"></p>
+            <p id="profil-created"></p>
+
+            <!-- Formulaire de modification -->
+            <form id="profil-edit-form">
+                <div>
+                    <label for="profil-pseudo-input">Modifier mon pseudo :</label><br>
+                    <input type="text" id="profil-pseudo-input">
+                </div>
+
+                <div>
+                    <label for="profil-password-input">Nouveau mot de passe :</label><br>
+                    <input type="password" id="profil-password-input">
+                </div>
+
+                <div>
+                    <label for="profil-password-confirm">Confirmer le nouveau mot de passe :</label><br>
+                    <input type="password" id="profil-password-confirm">
+                </div>
+
+                <button type="submit" style="margin-top:0.8rem;">Mettre à jour mon profil</button>
+                <p id="profil-message" style="margin-top:0.5rem; font-size:0.9rem;"></p>
+            </form>
+
+            <!-- Changer la photo de profil -->
+            <label for="profil-photo-input" class="button" style="margin-top:1rem;">Changer ma photo</label>
+            <input type="file" id="profil-photo-input" accept="image/*" style="display:none;">
+
+            <!-- Derniers films consultés -->
+            <div id="profil-recent" style="margin-top:1.5rem; width:100%;">
+                <h3>Derniers films consultés</h3>
+                <ul id="profil-recent-list"></ul>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>…</footer>
+
+<script src="script/homepage.js"></script>
+<script src="script/profil.js"></script>
+</body>
+</html>

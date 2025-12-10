@@ -6,6 +6,7 @@
     GESTION ÉTAT CONNECTÉ / DÉCONNECTÉ
    ============================================================== */
 
+const currentPage = window.location.pathname.split("/").pop();
 const loginLink   = document.querySelector('[data-role="login-link"]');
 const logoutLink  = null; // ajouter un lien logout plus tard 
 const signupLink  = document.querySelector('[data-role="signup-link"]');
@@ -70,8 +71,32 @@ updateNavbar();
 loginLink?.addEventListener("click", () => { //Ajouter login link ici
 });
 
+/* ================================
+   2. MESSAGE DE BIENVENUE PERSONNALISÉ
+   ================================ */
+
+const welcomeBox = document.getElementById("welcome");
+
+if (welcomeBox) {
+    const isLoggedIn = localStorage.getItem("mm_isLoggedIn") === "true";
+    const currentEmail = localStorage.getItem("mm_currentUserEmail");
+    const users = JSON.parse(localStorage.getItem("mm_users") || "[]");
+
+    if (isLoggedIn && currentEmail) {
+        const user = users.find(u => u.email === currentEmail);
+
+        if (user) {
+            const pseudo = user.pseudo ? user.pseudo : currentEmail;
+            welcomeBox.textContent = `Bienvenue ${pseudo} ! Prêt à dévorer du contenu ?`;
+        }
+    } else {
+        welcomeBox.textContent = `Bienvenue sur MediaMiam, le paradis du divertissement !`;
+    }
+}
+
+
 /* ==============================================================
-   2. HEADER SHRINK + ANIMATIONS D’APPARITION
+    HEADER SHRINK + ANIMATIONS D’APPARITION
    ============================================================== 
 
 const header = document.querySelector("header");
@@ -267,7 +292,6 @@ E-mail de contact : ${email}`;
         // supportForm.reset();
     });
 }
-
 
 /* ==============================================================
    DEBUG

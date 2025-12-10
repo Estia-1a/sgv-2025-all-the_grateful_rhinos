@@ -1,23 +1,15 @@
 /* ==============================================================
    INSCRIPTION – MEDIA MIAM
-   Gestion de la création de compte en localStorage
+   Gestion de la création de compte en localStorage pour éviter 
+   de devoir utiliser une bdd... à voir plus tard !
    ============================================================== */
 
-const signupForm   = document.getElementById("signup-form");
-const emailInput   = document.getElementById("signup-email");
-const pseudoInput  = document.getElementById("signup-pseudo");
-const passInput    = document.getElementById("signup-password");
-const passConfInput= document.getElementById("signup-password-confirm");
-const cguCheckbox  = document.getElementById("signup-cgu");
-const msgBox       = document.getElementById("signup-message");
 
+// Utilitaires de stockage
 function loadUsers() {
     try {
-        const raw = localStorage.getItem("mm_users");
-        if (!raw) return [];
-        return JSON.parse(raw);
-    } catch (e) {
-        console.error("Erreur de lecture des utilisateurs :", e);
+        return JSON.parse(localStorage.getItem("mm_users") || "[]");
+    } catch {
         return [];
     }
 }
@@ -25,6 +17,14 @@ function loadUsers() {
 function saveUsers(users) {
     localStorage.setItem("mm_users", JSON.stringify(users));
 }
+
+const birthInput   = document.getElementById("signup-birthdate");
+const signupForm    = document.getElementById("signup-form");
+const emailInput    = document.getElementById("signup-email");
+const pseudoInput   = document.getElementById("signup-pseudo");
+const passInput     = document.getElementById("signup-password");
+const passConfInput = document.getElementById("signup-password-confirm");
+const msgBox        = document.getElementById("signup-message");
 
 signupForm?.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -35,63 +35,54 @@ signupForm?.addEventListener("submit", (e) => {
     const pseudo = pseudoInput.value.trim();
     const pass   = passInput.value;
     const pass2  = passConfInput.value;
+    const birthdate = birthInput.value;
 
-    // Vérifications basiques
+
     if (!email || !pass || !pass2) {
         msgBox.textContent = "Merci de remplir tous les champs obligatoires.";
-        msgBox.style.color = "#E53935";
+        msgBox.style.color = "#ff0400ff";
         return;
     }
 
     if (pass.length < 6) {
         msgBox.textContent = "Le mot de passe doit contenir au moins 6 caractères.";
-        msgBox.style.color = "#E53935";
+        msgBox.style.color = "#ff0400ff";
         return;
     }
 
     if (pass !== pass2) {
         msgBox.textContent = "Les mots de passe ne correspondent pas.";
-        msgBox.style.color = "#E53935";
+        msgBox.style.color = "#ff0400ff";
         return;
     }
 
-    if (!cguCheckbox.checked) {
-        msgBox.textContent = "Vous devez accepter les CGU et la politique de confidentialité.";
-        msgBox.style.color = "#E53935";
-        return;
-    }
-
-    // Chargement des utilisateurs existants
     const users = loadUsers();
 
-    // Vérifier si l'email existe déjà
-    const already = users.find(u => u.email === email);
-    if (already) {
-        msgBox.textContent = "Un compte existe déjà avec cette adresse e-mail.";
-        msgBox.style.color = "#E53935";
+    if (users.find(u => u.email === email)) {
+        msgBox.textContent = "Un compte existe déjà avec cet e-mail.";
+        msgBox.style.color = "#ff0400ff";
         return;
     }
 
-    // Création du nouvel utilisateur
     const newUser = {
-        email: email,
+        email,
         pseudo: pseudo || null,
-        password: pass,          // Pour un vrai site : JAMAIS en clair
+        password: pass,
+        birthdate: birthdate || null,
         createdAt: new Date().toISOString()
     };
 
     users.push(newUser);
     saveUsers(users);
 
-    // Connexion auto
+    // connexion auto après inscription
     localStorage.setItem("mm_isLoggedIn", "true");
     localStorage.setItem("mm_currentUserEmail", email);
 
-    msgBox.textContent = "Compte créé avec succès ! Redirection en cours...";
-    msgBox.style.color = "#4CAF50";
+    msgBox.textContent = "Compte créé avec succès ! Redirection...";
+    msgBox.style.color = "#00ff08ff";
 
-    // Petite pause pour que l’utilisateur voit le message
     setTimeout(() => {
-        window.location.href = "index.html";
+        window.location.href = "profil.html";
     }, 1000);
 });
